@@ -6,12 +6,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: hsl(123, 100%, 75%);
+    background-color: hsl(49, 100%, 75%);
     font-family: 'neucha', cursive;
 }
 
-.heading {
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: red;
+    height: 7vh;
+    width: 15vw;
+    margin-top: 3%;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.header .heading {
     text-transform: uppercase;
     font-size: clamp(1rem, 3.2vw, 2rem);
-    padding-top: 2%;
+    color: white;
 }

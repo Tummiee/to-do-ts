@@ -13,7 +13,9 @@ let printName: (name: string) => never;
 const App: React.FC = () => {
   return (
     <div className="App">
-      <span className='heading'>Taskify</span>
+      <div className='header'>
+        <span className='heading'>Taskify</span>
+      </div>
     </div>
   );
 }
