@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: hsl(45, 30%, 95%);
+    background-color: #1A2A33;
     font-family: 'neucha', cursive;
 }
 
@@ -14,9 +14,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: red;
+    background: #A8BFC9;
     height: 7vh;
-    width: 15vw;
+    width: 17vw;
     margin-top: 3%;
     border-radius: 10px;
     z-index: 1;
@@ -24,6 +24,6 @@
 
 .header .heading {
     text-transform: uppercase;
-    font-size: clamp(1rem, 3.2vw, 2rem);
+    font-size: clamp(1.2rem, 3.2vw, 2rem);
     color: white;
 }

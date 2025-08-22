@@ -1,3 +1,5 @@
+
+
 .input{
     display: flex;
     width: 95%;
@@ -12,8 +14,9 @@
     padding: 20px 30px;
     font-size: clamp(1.5rem, 3.2vw, 2rem);
     transition: 0.2s;
-    box-shadow: inset 0 0 5px black;
+    box-shadow: inset 0 0 2px black;
     border: none;
+    height: 30px;
 }
 
 .input__box:focus{
@@ -30,17 +33,17 @@
     right: 0px;
     border: none;
     font-size: clamp(1rem, 1.7vw, 2rem);
-    background-color: hsl(49, 100%, 75%);
+    background-color: #A8BFC9;
     color: white;
     transition: 0.2s all;
-    box-shadow: 0 0 10px black;
+    box-shadow: 0 0 5px black;
 }
 
 .icon{
     
 }
 .input__submit:hover{
-    background-color: hsl(49, 100%, 85%);
+    background-color: #8c9ca5;
 }
 .input__submit:active{
     transform: scale(0.8);
@@ -82,6 +85,7 @@
     margin-top: 15px;
     background-image: url("../../public/textured-backgound.jpg");
     transition: 0.2s;
+    height: 30px;
 }
 
 .todos__single:hover{

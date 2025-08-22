@@ -47,7 +47,7 @@ const Todolist: React.FC<Props> = ({todos, setTodos, completedTodos, setComplete
       <Droppable droppableId= "TodosRemove">
         {(provided: DroppableProvided) => (
             <div className="todos remove" ref={provided.innerRef} {...provided.droppableProps}>
-            <span className="todos__heading">
+            <span className="todos__heading" style={{color: "white"}}>
               Completed Tasks
             </span>
             {completedTodos.map((todo, index) => (
