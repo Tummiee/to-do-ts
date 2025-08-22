@@ -11,7 +11,7 @@ interface Props{
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-// Define the correct types for react-beautiful-dnd
+// Define the types for react-beautiful-dnd
 interface DroppableProvided {
     innerRef: (element: HTMLElement | null) => void;
     droppableProps: React.HTMLAttributes<HTMLDivElement>;
@@ -24,7 +24,7 @@ const Todolist: React.FC<Props> = ({todos, setTodos, completedTodos, setComplete
       <Droppable droppableId='TodosList'>
         {
           (provided: DroppableProvided) => (
-            <div className="todos" ref={provided.innerRef} {...provided.droppableProps}>
+        <div className="todos" ref={provided.innerRef} {...provided.droppableProps}>
         <span className="todos__heading">
           Active Tasks
         </span>

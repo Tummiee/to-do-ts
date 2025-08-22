@@ -44,7 +44,7 @@
 }
 .input__submit:active{
     transform: scale(0.8);
-    box-shadow: 0 0 5px black;
+    box-shadow: 0 0 3px black;
 }
 
 .container{
@@ -114,18 +114,19 @@
     }
 
     .todos {
-        width: 95%;
+        width: 92%;
         margin-bottom: 10px;
-        border: 2px solid red;
+        align-items: center;
     }
 
     .todos__single {
-        width: 70%;
+        width: 90%;
     }
 
     .container{
         width: 95%;
         flex-direction: column;
+        align-items: center;
     }
 }
 
