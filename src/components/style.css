@@ -56,7 +56,7 @@
     align-items: flex-start;
     width: 95%;
     margin-top: 10px;
-    
+    gap: 10px;
 }
 
 .todos {
@@ -68,12 +68,83 @@
     width: 47.5%;
     color: white;
     background-color: hsl(49, 100%, 85%);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
 }
 
+.todos::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4CAF50, #2196F3);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.todos--expanded::before {
+    transform: scaleX(1);
+}
+
+.todos--expanded {
+    width: 65%;
+    transform: scale(1.02);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.todos--expanded.auto-expand {
+    animation: autoExpandPulse 0.6s ease-in-out;
+}
+
+@keyframes autoExpandPulse {
+    0% {
+        transform: scale(1.02);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(76, 175, 80, 0.4);
+    }
+    100% {
+        transform: scale(1.02);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.todos--contracted {
+    width: 30%;
+    opacity: 0.8;
+    transform: scale(0.98);
+    filter: grayscale(20%);
+}
 
 .todos__heading {
     font-size: clamp(1.5rem, 2.2vw, 2rem);
     color: hsl(0, 0%, 19%);
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.todos__heading::after {
+    content: '👆 Tap to switch focus';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    opacity: 0.6;
+    white-space: nowrap;
+    display: none;
 }
 
 .todos__single {
@@ -99,7 +170,6 @@
     font-size: 20px;
     border-radius: 10px;
     border: none;
-
 }
 
 .todos__single--text focus {
@@ -117,20 +187,79 @@
         width: 95%;
     }
 
+    .container {
+        width: 95%;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 8px;
+    }
+
     .todos {
-        width: 92%;
+        width: 48%;
+        min-height: 150px;
+        padding: 10px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        touch-action: manipulation;
+    }
+
+    .todos--expanded {
+        width: 70%;
+        min-height: 300px;
+        transform: scale(1.01);
+    }
+
+    .todos--contracted {
+        width: 25%;
+        min-height: 100px;
+        opacity: 0.7;
+        transform: scale(0.99);
+    }
+
+    .todos__heading {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
         margin-bottom: 10px;
-        align-items: center;
+    }
+
+    .todos__heading::after {
+        display: block;
+    }
+
+    .todos--expanded .todos__heading::after {
+        content: '👆 Tap to reset to active';
     }
 
     .todos__single {
         width: 90%;
+        padding: 15px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 98%;
+        gap: 5px;
     }
 
-    .container{
-        width: 95%;
-        flex-direction: column;
-        align-items: center;
+    .todos {
+        width: 48%;
+        padding: 8px;
+        min-height: 120px;
+    }
+
+    .todos--expanded {
+        width: 75%;
+        min-height: 250px;
+    }
+
+    .todos--contracted {
+        width: 22%;
+        min-height: 80px;
+    }
+
+    .todos__heading {
+        font-size: clamp(0.9rem, 2.2vw, 1.2rem);
+        margin-bottom: 8px;
     }
 }
 
@@ -140,4 +269,12 @@
 
 .remove {
     background-color: rgb(230, 101, 101);
+}
+
+.remove::before {
+    background: linear-gradient(90deg, #FF9800, #F44336);
+}
+
+.remove.todos--expanded {
+    border: 2px solid rgba(255, 152, 0, 0.3);
 }

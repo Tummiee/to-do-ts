@@ -25,6 +25,7 @@ const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("")
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+  const [autoExpandSection, setAutoExpandSection] = useState<'active' | 'completed' | null>(null);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +48,13 @@ const App: React.FC = () => {
       destination.index === source.index
     ) {
       return;
+    }
+
+    // Auto-expand the section where the task was dropped
+    if (destination.droppableId === "TodosList") {
+      setAutoExpandSection('active');
+    } else if (destination.droppableId === "TodosRemove") {
+      setAutoExpandSection('completed');
     }
 
     // Handle moving between lists
@@ -111,6 +119,8 @@ const App: React.FC = () => {
         setTodos={setTodos}
         completedTodos={completedTodos} 
         setCompletedTodos ={setCompletedTodos}
+        autoExpandSection={autoExpandSection}
+        setAutoExpandSection={setAutoExpandSection}
         />
       </div>
     </DragDropContext> 
