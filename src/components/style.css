@@ -1,5 +1,3 @@
-
-
 .input{
     display: flex;
     width: 95%;
@@ -62,7 +60,6 @@
 .todos {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 15px;
     border-radius: 15px;
     width: 47.5%;
@@ -76,7 +73,6 @@
 }
 
 .todos::before {
-    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -156,7 +152,11 @@
     margin-top: 15px;
     background-image: url("../../public/textured-backgound.jpg");
     transition: 0.2s;
-    height: 30px;
+    min-height: 30px;
+    height: auto; /* Allow height to grow with content */
+    word-break: break-word; /* Ensure long words wrap */
+    white-space: normal;    /* Allow text to wrap */
+    overflow: hidden;
 }
 
 .todos__single:hover{
@@ -164,22 +164,73 @@
     transform: scale(1.03);
 }
 
+/* Make the text inside single todo wrap */
 .todos__single--text {
     flex: 1;
     padding: 5px;
     font-size: 20px;
     border-radius: 10px;
     border: none;
-}
-
-.todos__single--text focus {
-    outline: none;
+    word-break: break-word;
+    white-space: pre-line; /* Preserve line breaks and wrap */
+    min-width: 0;
 }
 
 .icon {
     margin-left: 10px;
-    font-size: 25px;
+    font-size: 20px;
     cursor: pointer;
+}
+
+.single-todo {
+  transition: font-size 0.3s, padding 0.3s, max-height 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.single-todo--expanded {
+  font-size: 1.2rem;
+  padding: 1.2em;
+  max-height: 500px; /* Large enough for content */
+  opacity: 1;
+  overflow: visible;
+}
+
+.single-todo--contracted {
+  font-size: 0.9rem;
+  padding: 0.7em;
+  max-height: 38px; /* Only show one line, rest hidden */
+  opacity: 0.8;
+  overflow: hidden;
+}
+
+/* Responsive icon styling */
+.iconBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todo-icon {
+  transition: font-size 0.3s;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.single-todo--expanded .todo-icon {
+  font-size: 1.7em;
+}
+
+.single-todo--contracted .todo-icon {
+  font-size: 1em;
+}
+
+/* Hide icons in contracted tabs */
+.todos--contracted .iconBox {
+  display: none;
 }
 
 @media (max-width: 700px) {

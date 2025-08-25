@@ -7,25 +7,51 @@ import { Draggable } from 'react-beautiful-dnd'
 
 type Props = {
     index: number;
-    todo: Todo,
-    todos: Todo[],
+    todo: Todo;
+    todos: Todo[];
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    completedTodos: Todo[];
+    setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    isCompletedList: boolean;
+    isExpanded?: boolean;
 }
 
-// Define the types for react-beautiful-dnd Draggable
+// Define the types foyr react-beautiful-dnd Draggable
 interface DraggableProvided {
     innerRef: (element: HTMLElement | null) => void;
     draggableProps: React.HTMLAttributes<HTMLFormElement>;
     dragHandleProps: React.HTMLAttributes<HTMLFormElement> | null | undefined;
 }
 
-const SingleTodo = ({index, todo, todos, setTodos }: Props) => {
+const SingleTodo = ({
+    index,
+    todo,
+    todos,
+    setTodos,
+    completedTodos,
+    setCompletedTodos,
+    isCompletedList,
+    isExpanded
+}: Props) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editTodo, setEditTodo] = useState<string>(todo.todo)
 
     const handleDone = (id: number) => {
-        setTodos(todos.map((todo)=>
-            todo.id===id?{...todo, isDone:!todo.isDone}:todo))
+        if (!isCompletedList) {
+            // Move from active to completed
+            const movedTodo = todos.find((t) => t.id === id);
+            if (movedTodo) {
+                setTodos(todos.filter((t) => t.id !== id));
+                setCompletedTodos([...completedTodos, { ...movedTodo, isDone: true }]);
+            }
+        } else {
+            // Move from completed to active
+            const movedTodo = completedTodos.find((t) => t.id === id);
+            if (movedTodo) {
+                setCompletedTodos(completedTodos.filter((t) => t.id !== id));
+                setTodos([...todos, { ...movedTodo, isDone: false }]);
+            }
+        }
     }
     const handleDelete = (id: number) => {
         setTodos(todos.filter((todo) => todo.id !== id))
@@ -76,7 +102,7 @@ const SingleTodo = ({index, todo, todos, setTodos }: Props) => {
                     
                     
                     
-                    <div>
+                    <div className='iconBox'>
                         <span className="icon" onClick={() => 
                                 setEdit(!edit)
                             

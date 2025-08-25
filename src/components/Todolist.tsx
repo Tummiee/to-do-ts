@@ -64,11 +64,15 @@ const Todolist: React.FC<Props> = ({todos, setTodos, completedTodos, setComplete
         
         {todos.map((todo, index) => (
           <SingleTodo 
-          index={index}
-          todo={todo} 
-          key={todo.id} 
-          todos={todos}
-          setTodos={setTodos}
+            index={index}
+            todo={todo}
+            key={todo.id}
+            todos={todos}
+            setTodos={setTodos}
+            completedTodos={completedTodos}
+            setCompletedTodos={setCompletedTodos}
+            isCompletedList={false}
+            isExpanded={currentExpandedSection === 'active'}
           />
         ))}
         {provided.placeholder}
@@ -90,11 +94,15 @@ const Todolist: React.FC<Props> = ({todos, setTodos, completedTodos, setComplete
             </span>
             {completedTodos.map((todo, index) => (
               <SingleTodo 
-              index={index}
-              todo={todo} 
-              key={todo.id} 
-              todos={completedTodos}
-              setTodos={setCompletedTodos}
+                index={index}
+                todo={todo}
+                key={todo.id}
+                todos={todos}
+                setTodos={setTodos}
+                completedTodos={completedTodos}
+                setCompletedTodos={setCompletedTodos}
+                isCompletedList={true}
+                isExpanded={currentExpandedSection === 'completed'}
               />
             ))}
             {provided.placeholder}
